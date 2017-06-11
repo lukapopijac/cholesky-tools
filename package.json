@@ -1,0 +1,29 @@
+{
+  "name": "cholesky-tools",
+  "version": "0.0.1",
+  "description": "Basic operations for symmetric poistive-definite matrices.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukapopijac/cholesky-tools.git"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "cholesky",
+    "cholesky decomposition",
+    "positive-definite matrix",
+    "symmetric matrix"
+  ],
+  "author": "Luka Popijac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukapopijac/cholesky-tools/issues"
+  },
+  "homepage": "https://github.com/lukapopijac/cholesky-tools#readme"
+}
