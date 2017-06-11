@@ -1,10 +1,9 @@
 {
   "name": "cholesky-tools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Basic operations for symmetric poistive-definite matrices.",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukapopijac/cholesky-tools.git"
