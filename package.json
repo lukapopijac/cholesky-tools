@@ -3,7 +3,9 @@
   "version": "0.0.2",
   "description": "Basic operations for symmetric poistive-definite matrices.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jasmine"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lukapopijac/cholesky-tools.git"
@@ -24,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/lukapopijac/cholesky-tools/issues"
   },
-  "homepage": "https://github.com/lukapopijac/cholesky-tools#readme"
+  "homepage": "https://github.com/lukapopijac/cholesky-tools#readme",
+  "devDependencies": {
+    "jasmine": "^2.6.0"
+  }
 }

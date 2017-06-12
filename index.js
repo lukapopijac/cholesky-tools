@@ -25,19 +25,19 @@ function determinant(A, choleskyL) {  // choleskyL is optional parameter
 function inverse(A, choleskyL) {
 	// A must be symmetric positive definite matrix
 	// choleskyL is optional
-	if(typeof X == 'number') return 1/X;
-	else if(X.length==1) return [1/X];
-	else if(X.length==2) {
-		var a = X[0][0], b = X[0][1], d = X[1][1];
+	if(typeof A == 'number') return 1/A;
+	else if(A.length==1) return A[0].length==1 ? [[1/A[0]]] : [1/A];
+	else if(A.length==2) {
+		var a = A[0][0], b = A[0][1], d = A[1][1];
 		var di = 1/(a*d-b*b);
 		return [
 			[d*di, -b*di],
 			[-b*di, a*di]
 		];
-	} else if(X.length==3) {
-		var a = X[0][0];
-		var d = X[1][0], e = X[1][1];
-		var g = X[2][0], h = X[2][1], i = X[2][2];
+	} else if(A.length==3) {
+		var a = A[0][0];
+		var d = A[1][0], e = A[1][1];
+		var g = A[2][0], h = A[2][1], i = A[2][2];
 
 		var a00 = e*i-h*h;
 		var a10 = h*g-d*i, a11 = a*i-g*g;
