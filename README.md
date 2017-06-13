@@ -55,4 +55,3 @@ var det2 = ct.determinant(A, L);  // 4
 License
 -------
 This software is released under the MIT license.
-
