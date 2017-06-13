@@ -8,7 +8,7 @@ module.exports = {
 
 function determinant(A, choleskyL) {  // choleskyL is optional parameter
 	if(typeof A == 'number') return A;
-	else if(A.length==1) return A[0][0];
+	else if(A.length==1) return A[0].length==1 ? A[0][0] : A[0];
 	else if(A.length==2) return A[0][0]*A[1][1]-A[0][1]*A[1][0];
 	else if(A.length==3) return (choleskyL ?
 		Math.pow(choleskyL[0][0]*choleskyL[1][1]*choleskyL[2][2], 2) :
@@ -80,6 +80,8 @@ function lowerTriangularInverse(L) {  // L must be lower-triangular
 }
 
 function cholesky(A) {
+	if(typeof A == 'number') return Math.sqrt(A);
+	if(A.length==1 && typeof A[0] == 'number') return [Math.sqrt(A[0])];
 	let L = Array(A.length);
 	for(let i=0; i<A.length; i++) {
 		let Li = L[i] = Array(i+1);
