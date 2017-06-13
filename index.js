@@ -1,5 +1,12 @@
 'use strict';
 
+/**
+These functions are intented to be used only with symmetric positive definite
+matrices.
+For performance reasons there is no input validation. It is up to user to
+insure valid input.
+*/
+
 module.exports = {
 	determinant: determinant,
 	inverse: inverse,
@@ -8,7 +15,7 @@ module.exports = {
 
 function determinant(A, choleskyL) {  // choleskyL is optional parameter
 	if(typeof A == 'number') return A;
-	else if(A.length==1) return A[0].length==1 ? A[0][0] : A[0];
+	else if(A.length==1) return A[0][0];
 	else if(A.length==2) return A[0][0]*A[1][1]-A[0][1]*A[1][0];
 	else if(A.length==3) return (choleskyL ?
 		Math.pow(choleskyL[0][0]*choleskyL[1][1]*choleskyL[2][2], 2) :
@@ -17,7 +24,7 @@ function determinant(A, choleskyL) {  // choleskyL is optional parameter
 		A[0][2] * (A[1][0]*A[2][1] - A[1][1]*A[2][0])
 	);
 	var r = 1;
-	var L = choleskyL || cholesky(X);
+	var L = choleskyL || cholesky(A);
 	for(var i=0; i<A.length; i++) r *= L[i][i];
 	return r*r;
 }
@@ -26,14 +33,11 @@ function inverse(A, choleskyL) {
 	// A must be symmetric positive definite matrix
 	// choleskyL is optional
 	if(typeof A == 'number') return 1/A;
-	else if(A.length==1) [[1/A[0][0]]];
+	else if(A.length==1) return [[1/A[0][0]]];
 	else if(A.length==2) {
 		var a = A[0][0], b = A[0][1], d = A[1][1];
 		var di = 1/(a*d-b*b);
-		return [
-			[d*di, -b*di],
-			[-b*di, a*di]
-		];
+		return [[d*di, -b*di], [-b*di, a*di]];
 	} else if(A.length==3) {
 		var a = A[0][0];
 		var d = A[1][0], e = A[1][1];
@@ -50,13 +54,11 @@ function inverse(A, choleskyL) {
 			[a20*detI, a21*detI, a22*detI]
 		];
 	}
-	var L = choleskyL || cholesky(A);
-	var X = lowerTriangularInverse(L);
-	var n = L.length;
-	for(var i=0; i<n; i++) {
+	var X = lowerTriangularInverse(choleskyL || cholesky(A));
+	for(var i=0; i<X.length; i++) {
 		for(var j=0; j<=i; j++) {
 			var s = 0;
-			for(var k=i; k<n; k++) s += X[k][i]*X[k][j];
+			for(var k=i; k<X.length; k++) s += X[k][i]*X[k][j];
 			X[i][j] = s;
 			X[j][i] = s;
 		}
@@ -64,33 +66,34 @@ function inverse(A, choleskyL) {
 	return X;
 }
 
-function lowerTriangularInverse(L) {  // L must be lower-triangular
-	let n = L.length;
-	let X = Array(n);
-	for(let i=0; i<n; i++) X[i] = Array(n);
-	for(let k=0; k<n; k++) {
-		X[k][k] = 1/L[k][k];
-		for(let i=k+1; i<n; i++) {
-			let s = 0;
-			for(let j=k; j<i; j++) s -= L[i][j]*X[j][k];
-			X[i][k] = s/L[i][i];
-		}
-	}
-	return X;
-}
-
 function cholesky(A) {
 	if(typeof A == 'number') return Math.sqrt(A);
-	if(A.length==1) return [[Math.sqrt(A[0][0])]];
-	let L = Array(A.length);
-	for(let i=0; i<A.length; i++) {
-		let Li = L[i] = Array(i+1);
-		for(let j=0; j<i+1; j++) {
-			let Lj = L[j];
-			let s = A[i][j];
-			for(let k=0; k<j; k++) s -= Li[k]*Lj[k];
+	var n = A.length;
+	if(n==1) return [[Math.sqrt(A[0][0])]];
+	var L = Array(n);
+	for(var i=0; i<n; i++) {
+		var Li = L[i] = Array(n).fill(0);
+		for(var j=0; j<i+1; j++) {
+			var Lj = L[j];
+			var s = A[i][j];
+			for(var k=0; k<j; k++) s -= Li[k]*Lj[k];
 			Li[j] = i==j ? Math.sqrt(s) : s/Lj[j];
 		}
 	}
 	return L;
+}
+
+function lowerTriangularInverse(L) {  // L must be lower-triangular
+	var n = L.length;
+	var X = Array(n);
+	for(var i=0; i<n; i++) X[i] = Array(n);
+	for(var k=0; k<n; k++) {
+		X[k][k] = 1/L[k][k];
+		for(var i=k+1; i<n; i++) {
+			var s = 0;
+			for(var j=k; j<i; j++) s -= L[i][j]*X[j][k];
+			X[i][k] = s/L[i][i];
+		}
+	}
+	return X;
 }

@@ -46,13 +46,13 @@ var matrices = [
 	}, {
 		A: [[4, -6], [-6, 25]],
 		Ainv: [[25/64, 3/32], [3/32, 1/16]],
-		L: [[-2, 0], [3, 4]],
+		L: [[2, 0], [-3, 4]],
 		Linv: null,
 		det: 64
 	}, {
 		A: [[1, 3], [3, 13]],
 		Ainv: [[13/4, -3/4], [-3/4, 1/4]],
-		L: [[-1,0],[-3, -2]],
+		L: [[1,0],[3, 2]],
 		Linv: null,
 		det: 4
 	}, {
@@ -97,19 +97,42 @@ function itString(A) {
 	return 'should work for A = ' + JSON.stringify(A);
 }
 
-describe('Inverse (without providing parameter choleskyL)', function() {
+describe('Determinant (without parameter choleskyL)', function() {
+	matrices.forEach(function(m) {
+		it(itString(m.A), function() {
+			expect(ct.determinant(m.A)).toBeCloseToMatrix(m.det);
+		});
+	});
+});
+
+describe('Determinant (with parameter choleskyL)', function() {
+	matrices.forEach(function(m) {
+		it(itString(m.A), function() {
+			expect(ct.determinant(m.A, m.L)).toBeCloseToMatrix(m.det);
+		});
+	});
+});
+
+describe('Inverse (without parameter choleskyL)', function() {
 	matrices.forEach(function(m) {
 		it(itString(m.A), function() {
 			expect(ct.inverse(m.A)).toBeCloseToMatrix(m.Ainv);
 		});
-	});	
+	});
 });
 
-describe('Inverse (with providing parameter choleskyL)', function() {
+describe('Inverse (with parameter choleskyL)', function() {
 	matrices.forEach(function(m) {
 		it(itString(m.A), function() {
-			expect(ct.inverse(m.A, ct.cholesky(m.A))).toBeCloseToMatrix(m.Ainv);
+			expect(ct.inverse(m.A, m.L)).toBeCloseToMatrix(m.Ainv);
 		});
-	});	
+	});
 });
 
+describe('Cholesky decomposition', function() {
+	matrices.forEach(function(m) {
+		it(itString(m.A), function() {
+			expect(ct.cholesky(m.A)).toBeCloseToMatrix(m.L);
+		});
+	});
+});
