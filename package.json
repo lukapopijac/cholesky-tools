@@ -1,6 +1,6 @@
 {
   "name": "cholesky-tools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Basic operations for symmetric poistive-definite matrices.",
   "main": "index.js",
   "scripts": {
