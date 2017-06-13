@@ -1,19 +1,3 @@
-beforeEach(function () {
-  jasmine.addMatchers({
-    toBePlaying: function () {
-      return {
-        compare: function (actual, expected) {
-          var player = actual;
-
-          return {
-            pass: player.currentlyPlayingSong === expected && player.isPlaying
-          }
-        }
-      };
-    }
-  });
-});
-
 beforeEach(function() {
 	jasmine.addMatchers({
 		toBeCloseToMatrix: function() {
@@ -23,6 +7,13 @@ beforeEach(function() {
 					var b = expected;
 					var t = 1e-8;
 					
+					// if they are just numbers
+					if(typeof a == 'number' && typeof b == 'number') {
+						if(a===b) return {pass: true};
+						return {pass: Math.abs(a-b)<=t};
+					}
+					
+					// now we know they should be arrays
 					if(!Array.isArray(a) || !Array.isArray(b)) return {pass: false};
 					if(a.length != b.length) return {pass: false};
 					if(a.length == 0) return {pass: true};

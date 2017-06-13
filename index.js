@@ -26,7 +26,7 @@ function inverse(A, choleskyL) {
 	// A must be symmetric positive definite matrix
 	// choleskyL is optional
 	if(typeof A == 'number') return 1/A;
-	else if(A.length==1) return A[0].length==1 ? [[1/A[0]]] : [1/A];
+	else if(A.length==1) [[1/A[0][0]]];
 	else if(A.length==2) {
 		var a = A[0][0], b = A[0][1], d = A[1][1];
 		var di = 1/(a*d-b*b);
@@ -81,7 +81,7 @@ function lowerTriangularInverse(L) {  // L must be lower-triangular
 
 function cholesky(A) {
 	if(typeof A == 'number') return Math.sqrt(A);
-	if(A.length==1 && typeof A[0] == 'number') return [Math.sqrt(A[0])];
+	if(A.length==1) return [[Math.sqrt(A[0][0])]];
 	let L = Array(A.length);
 	for(let i=0; i<A.length; i++) {
 		let Li = L[i] = Array(i+1);
