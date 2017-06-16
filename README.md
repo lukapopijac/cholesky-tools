@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/lukapopijac/cholesky-tools.svg?branch=master)](https://travis-ci.org/lukapopijac/cholesky-tools)
+[![Coverage Status](https://coveralls.io/repos/github/lukapopijac/cholesky-tools/badge.svg?branch=master)](https://coveralls.io/github/lukapopijac/cholesky-tools?branch=master)
 
 Cholesky Tools
 ==============
