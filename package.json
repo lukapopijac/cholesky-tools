@@ -1,7 +1,7 @@
 {
   "name": "cholesky-tools",
   "version": "0.1.4",
-  "description": "Basic operations for symmetric poistive-definite matrices.",
+  "description": "Basic operations for symmetric poistive definite matrices.",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/lukapopijac/cholesky-tools#readme",
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "istanbul": "^0.4.5",
     "jasmine": "^2.6.0"
   }
