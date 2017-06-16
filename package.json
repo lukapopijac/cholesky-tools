@@ -4,7 +4,8 @@
   "description": "Basic operations for symmetric poistive-definite matrices.",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "cover": "istanbul cover -x spec/** node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/lukapopijac/cholesky-tools#readme",
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "jasmine": "^2.6.0"
   }
 }
