@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lukapopijac/cholesky-tools.svg?branch=master)](https://travis-ci.org/lukapopijac/cholesky-tools)
+
 Cholesky Tools
 ==============
 
