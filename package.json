@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
-    "cover": "istanbul cover -x spec/*.js node_modules/jasmine/bin/jasmine.js"
+    "cover": "istanbul cover node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
